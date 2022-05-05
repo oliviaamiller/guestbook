@@ -16,3 +16,7 @@ jobs:
     - run: npm test
       env:
         CI: true
+        SUPABASE_API_KEY: ${{secrets.API_KEY}}
+        SUPABASE_API_URL: ${{secrets.API_URL}}
+
+        
