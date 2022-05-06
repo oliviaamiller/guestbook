@@ -6,24 +6,35 @@ import EntryForm from '../../components/Guestbook/EntryForm';
 
 export default function Guestbook() {
   const { user } = useUser();
-  const [content, setContent] = useState('');
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
 
-const fetchEntries = () => {
-  getEntries()
-    .then(setEntries)
-    .finally(() => setLoading(false));
-};
+  useEffect(() => {
+    async function fetchEntries() {
+      const results = await getEntries();
+      setEntries(results);
+      setLoading(false);
+    }
+    fetchEntries();
+  }, []);
 
-useEffect(() => {
-  fetchEntries();
-}, []);
+  async function refreshEntries() {
+    const results = await getEntries();
+    setEntries(results);
+    setLoading(false);
+  }
 
   return (
     <>
       <Header />
-      <EntryForm onAddEntry={fetchEntries} />
+      <EntryForm refreshEntries={refreshEntries}/>
+      {loading
+      ? <p>loading...</p>
+      : (
+        <>
+        <h3>Entries</h3>
+        </>
+      )}
     </>
   );
 }

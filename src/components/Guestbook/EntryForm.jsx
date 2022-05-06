@@ -2,23 +2,25 @@ import { useState } from 'react';
 import { useUser } from '../../context/UserContext';
 import { createEntry } from '../../services/entries';
 
-export default function EntryForm({ onAddEntry }) {
+export default function EntryForm({ refreshEntries }) {
   const [content, setContent] = useState('');
   const { user } = useUser();
 
-  const addNewEntry = async (e) => {
+  async function addNewEntry(e) {
     e.preventDefault();
-    const entry = await createEntry({ userId: user.id, content });
-    onAddEntry(entry);
+    await createEntry({ userId: user.id, content });
+
+    //clear the form
     setContent('');
-  };
+    refreshEntries();
+  }
 
   return (
     <>
+    <h3>Write Entry</h3>
       <div>
         <form onSubmit={addNewEntry}>
           <textarea
-            id="content"
             name="content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
