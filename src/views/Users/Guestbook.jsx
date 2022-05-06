@@ -1,7 +1,12 @@
-import React from 'react'
+import { useUser } from '../../context/UserContext';
 
 export default function Guestbook() {
+  const { logout } = useUser();
+
   return (
-    <div>Guestbook</div>
-  )
+    <>
+      <h2>Guestbook</h2>
+      <button onClick={logout}>log out</button>
+    </>
+  );
 }
