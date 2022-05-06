@@ -1,6 +1,7 @@
 import { useUser } from '../../context/UserContext';
 import { useEffect, useState } from 'react';
 import { getEntries } from '../../services/entries';
+import Header from '../../components/Header';
 
 export default function Guestbook() {
   const { logout, user } = useUser();
@@ -19,8 +20,8 @@ export default function Guestbook() {
 
   return (
     <>
-      <h2>Guestbook</h2>
-      <p>Hello {user.email}, you logged in successfully! here are your entries:</p>
+    <Header />
+    
       {/* {loading ? (
         <p>loading...</p>
       ) : (
@@ -30,7 +31,7 @@ export default function Guestbook() {
           ))}
         </ul>
       )} */}
-      <button onClick={logout}>log out</button>
+  
     </>
   );
 }
