@@ -6,19 +6,22 @@ import EntryForm from '../../components/Guestbook/EntryForm';
 
 export default function Guestbook() {
   const { user } = useUser();
-  const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [entries, setEntries] = useState([]);
 
   useEffect(() => {
     async function fetchEntries() {
       const results = await getEntries();
+      console.log(results);
       setEntries(results);
       setLoading(false);
     }
     fetchEntries();
   }, []);
 
+
   async function refreshEntries() {
+
     const results = await getEntries();
     setEntries(results);
     setLoading(false);
@@ -27,12 +30,20 @@ export default function Guestbook() {
   return (
     <>
       <Header />
-      <EntryForm refreshEntries={refreshEntries}/>
-      {loading
-      ? <p>loading...</p>
-      : (
+      <EntryForm refreshEntries={refreshEntries} />
+      {loading ? (
+        <p>loading...</p>
+      ) : (
         <>
-        <h3>Entries</h3>
+          <h3>Entries</h3>
+          <ul>
+            {entries.map((entry) => (
+              <li key={entry.id}>
+                {entry.content}
+                {user.email}
+              </li>
+            ))}
+          </ul>
         </>
       )}
     </>

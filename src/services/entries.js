@@ -5,6 +5,7 @@ export async function getEntries() {
     .from('entries')
     .select()
     .order('created_at', { ascending: false });
+    console.log(request);
   return parseData(request);
 }
 

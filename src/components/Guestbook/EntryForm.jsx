@@ -12,7 +12,7 @@ export default function EntryForm({ refreshEntries }) {
 
     //clear the form
     setContent('');
-    refreshEntries();
+    await refreshEntries();
   }
 
   return (
