@@ -7,7 +7,7 @@ export default function Header() {
     <>
     <h2>Guestbook</h2>
       <p>
-        Hello {user.email}, you logged in successfully! here are your entries:
+        Hello {user.email}!
       </p>
       
       <button onClick={logout}>log out</button>

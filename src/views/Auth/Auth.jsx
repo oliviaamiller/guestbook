@@ -15,7 +15,7 @@ export default function Auth() {
       e.preventDefault();
       await login(email, password);
 
-      const url = location.search.origin ? location.search.origin.pathname : '/';
+      const url = location.search.origin ? location.search.origin.pathname : '/guestbook';
       history.replace(url);
     } catch (error) {
       setError(error.message);
@@ -27,7 +27,7 @@ export default function Auth() {
       e.preventDefault();
       await signUp(email, password);
 
-      const url = location.search.origin ? location.search.origin.pathname : '/';
+      const url = location.search.origin ? location.search.origin.pathname : '/guestbook';
       history.replace(url);
     } catch (error) {
       setError(error.message);

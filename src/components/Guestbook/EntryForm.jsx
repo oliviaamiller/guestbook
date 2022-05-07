@@ -17,11 +17,12 @@ export default function EntryForm({ refreshEntries }) {
 
   return (
     <>
-    <h3>Write Entry</h3>
+      <h3>Write Entry</h3>
       <div>
         <form onSubmit={addNewEntry}>
           <textarea
             name="content"
+            placeholder="write in the guestbook"
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
