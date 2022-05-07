@@ -2,7 +2,7 @@ import { Route, Switch } from 'react-router-dom';
 import Auth from './views/Auth/Auth';
 import Home from './views/Home/Home';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import Guestbook from './views/Users/Guestbook';
+import EntryList from './views/Users/EntryList';
 
 export default function App() {
   return (
@@ -11,7 +11,7 @@ export default function App() {
         <Auth />
       </Route>
       <PrivateRoute path="/guestbook">
-        <Guestbook />
+        <EntryList />
       </PrivateRoute>
       <Route path="/">
         <Home />

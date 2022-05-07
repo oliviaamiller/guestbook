@@ -4,7 +4,7 @@ import Header from '../../components/Guestbook/Header';
 import { getEntries } from '../../services/entries';
 import EntryForm from '../../components/Guestbook/EntryForm';
 
-export default function Guestbook() {
+export default function EntryList() {
   const { user } = useUser();
   const [loading, setLoading] = useState(true);
   const [entries, setEntries] = useState([]);
