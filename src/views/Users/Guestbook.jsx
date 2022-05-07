@@ -19,9 +19,7 @@ export default function Guestbook() {
     fetchEntries();
   }, []);
 
-
   async function refreshEntries() {
-
     const results = await getEntries();
     setEntries(results);
     setLoading(false);
@@ -36,14 +34,18 @@ export default function Guestbook() {
       ) : (
         <>
           <h3>Entries</h3>
-          <ul>
-            {entries.map((entry) => (
-              <li key={entry.id}>
-                {entry.content}
-                {user.email}
-              </li>
-            ))}
-          </ul>
+          {entries.length ? (
+            <ul>
+              {entries.map((entry) => (
+                <li key={entry.id}>
+                  {entry.content}
+                  {user.email}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>no entries yet</p>
+          )}
         </>
       )}
     </>
