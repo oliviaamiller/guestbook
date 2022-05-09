@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Header from '../../components/Guestbook/Header';
 import { getEntries } from '../../services/entries';
 import EntryForm from '../../components/Guestbook/EntryForm';
+import styles from '../../App.css';
 
 export default function EntryList() {
   const { user } = useUser();
@@ -12,7 +13,6 @@ export default function EntryList() {
   useEffect(() => {
     async function fetchEntries() {
       const results = await getEntries();
-      console.log(results);
       setEntries(results);
       setLoading(false);
     }
@@ -28,26 +28,31 @@ export default function EntryList() {
   return (
     <>
       <Header />
-      <EntryForm refreshEntries={refreshEntries} />
-      {loading ? (
-        <p>loading...</p>
-      ) : (
-        <>
-          <h3>Entries</h3>
-          {entries.length ? (
-            <ul>
-              {entries.map((entry) => (
-                <li key={entry.id}>
-                  {entry.content}
-                  {user.email}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>no entries yet</p>
-          )}
-        </>
-      )}
+      <section className={styles.entries}>
+        <div className={styles.form}>
+          <EntryForm refreshEntries={refreshEntries} />
+        </div>
+        {loading ? (
+          <p>loading...</p>
+        ) : (
+          <div className={styles.entryList}>
+            <h3>Entries</h3>
+            {entries.length ? (
+              <span>
+                {entries.map((entry) => (
+                  <div key={entry.id}>
+                    {entry.content}
+                    <br />
+                    {user.email}
+                  </div>
+                ))}
+              </span>
+            ) : (
+              <p>no entries yet</p>
+            )}
+          </div>
+        )}
+      </section>
     </>
   );
 }

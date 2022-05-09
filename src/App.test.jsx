@@ -3,6 +3,21 @@ import userEvent from '@testing-library/user-event';
 import App from './App';
 import { MemoryRouter } from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+import mockData from '../src/fixtures/mockdata';
+import { waitFor } from '@testing-library/react';
+
+const server = setupServer(
+  rest.post(
+    'https://ezwbsacoojmonmiqffad.supabase.co/auth/v1/token',
+    (req, res, ctx) => res(ctx.json(mockData))
+  )
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 describe('Behavioral Test', () => {
   it('signs up, goes to guestbook, and adds a new entry to the list', async () => {
@@ -20,27 +35,34 @@ describe('Behavioral Test', () => {
     const guestbookLink = screen.getByRole('link', { name: /view guestbook/i });
     userEvent.click(guestbookLink);
 
-    const email = screen.getByPlaceholderText(/email/i);
-    userEvent.type(email, 'testing@123.com');
+    const email = await screen.findByPlaceholderText(/email/i);
+    userEvent.type(email, 'newtest@newuser.com');
 
-    const password = screen.getByPlaceholderText(/password/i);
+    const password = await screen.findByPlaceholderText(/password/i);
     userEvent.type(password, 'testtest');
 
-    const button = screen.getByRole('button', { name: /log in/i });
+    const button = await screen.findByRole('button', { name: /sign up/i });
     userEvent.click(button);
 
-    await screen.findByText('Hello testing@123.com!', { exact: false });
+    waitFor(() => {
+     screen.getByText('Hello newtest@newuser.com!', { exact: false });
 
-    const textInput = await screen.findByPlaceholderText(
-      /write in the guestbook/i
+      const textInput = screen.getByPlaceholderText(
+        /write in the guestbook/i
+      );
+      userEvent.type(textInput, 'new entry');
+  
+      const entryButton = screen.getByRole('button', {
+        name: /add entry/i,
+      });
+      userEvent.click(entryButton);
+  
+    const newEntry = screen.getByText('new entry', { exact: false }
     );
-    userEvent.type(textInput, 'new entry');
 
-    const entryButton = await screen.findByRole('button', {
-      name: /add entry/i,
-    });
-    userEvent.click(entryButton);
+      expect(newEntry).toBeInTheDocument();
+    })
 
-    await screen.findByText('new entry', { exact: false });
+  
   });
 });

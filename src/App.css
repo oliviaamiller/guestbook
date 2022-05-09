@@ -31,12 +31,15 @@ a:hover {
     width: 15rem;
     box-shadow: 10px 10px;
     border: 1px cornflowerblue solid;
+    color: cornflowerblue;
+    font-family: monospace;
 }
 
 .form input {
     margin: .5rem;
     padding: .25rem;
     border: cornflowerblue 1px solid;
+    font-family: monospace;
 }
 
 .form ::placeholder { 
@@ -44,7 +47,7 @@ a:hover {
     color: cornflowerblue;
 }
 
-.form button {
+button {
     margin: .5rem;
     padding: .25rem;
     font-family: monospace;
@@ -54,3 +57,24 @@ a:hover {
     background-color: aliceblue;
     color: cornflowerblue;
 }
+
+.entries {
+    margin-top: 2rem;
+    display: grid;
+    grid: 1fr  / 1fr 1fr;
+    justify-items: center;
+}
+
+textarea {
+    resize: none;
+    color: cornflowerblue;
+    border: cornflowerblue 1px solid;
+    height: 20rem;
+    width: 14rem;
+}
+
+.entryList {
+    color: cornflowerblue;
+    font-family: monospace;
+}
+
