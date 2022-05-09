@@ -4,6 +4,7 @@ import Home from './views/Home/Home';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import EntryList from './views/Users/EntryList';
 import { UserProvider } from './context/UserContext';
+import './App.css';
 
 export default function App() {
   return (

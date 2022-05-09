@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
+import styles from '../../App.css';
 
 export default function Auth() {
   const { login, signUp } = useUser();
@@ -35,10 +36,10 @@ export default function Auth() {
   };
 
   return (
-    <>
+    <section className={styles.home}>
       <h2>Auth Page</h2>
-      <div>
-        <form>
+      <div className={styles.auth}>
+        <form className={styles.form}>
           <input
             type="email"
             value={email}
@@ -60,6 +61,6 @@ export default function Auth() {
           <p>{error}</p>
         </form>
       </div>
-    </>
+    </section>
   );
 }

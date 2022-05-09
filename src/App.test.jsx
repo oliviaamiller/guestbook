@@ -7,7 +7,10 @@ import { UserProvider } from './context/UserContext';
 describe('Behavioral Test', () => {
   it('signs up, goes to guestbook, and adds a new entry to the list', async () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter
+        initialEntries={['/', '/login', 'guestbook']}
+        initialIndex={0}
+      >
         <UserProvider>
           <App />
         </UserProvider>
@@ -28,10 +31,14 @@ describe('Behavioral Test', () => {
 
     await screen.findByText('Hello testing@123.com!', { exact: false });
 
-    const textInput = screen.getByPlaceholderText(/write in the guestbook/i);
+    const textInput = await screen.findByPlaceholderText(
+      /write in the guestbook/i
+    );
     userEvent.type(textInput, 'new entry');
 
-    const entryButton = screen.getByRole('button', { name: /add entry/i });
+    const entryButton = await screen.findByRole('button', {
+      name: /add entry/i,
+    });
     userEvent.click(entryButton);
 
     await screen.findByText('new entry', { exact: false });
