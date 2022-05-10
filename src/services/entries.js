@@ -4,8 +4,7 @@ export async function getEntries() {
   const request = await client
     .from('entries')
     .select()
-    .order('created_at', { ascending: false });
-    console.log(request);
+    .order('created_at', { ascending: false });;
   return parseData(request);
 }
 

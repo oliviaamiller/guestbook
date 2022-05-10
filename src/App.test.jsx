@@ -32,9 +32,6 @@ describe('Behavioral Test', () => {
       </MemoryRouter>
     );
 
-    const guestbookLink = screen.getByRole('link', { name: /view guestbook/i });
-    userEvent.click(guestbookLink);
-
     const email = await screen.findByPlaceholderText(/email/i);
     userEvent.type(email, 'newtest@newuser.com');
 
