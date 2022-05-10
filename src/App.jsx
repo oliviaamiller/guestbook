@@ -16,9 +16,9 @@ export default function App() {
         <PrivateRoute path="/guestbook">
           <EntryList />
         </PrivateRoute>
-        <Route path="/">
+        <PrivateRoute path="/">
           <Home />
-        </Route>
+        </PrivateRoute>
       </Switch>
     </UserProvider>
   );
